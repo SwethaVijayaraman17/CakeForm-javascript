@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            font-family: "Montserrat", sans-serif;
+        }
+
+        input {
+            margin: 15px 0px;
+        }
+
+        label {
+            color: rgb(92, 6, 161);
+            font-weight: 600;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 5% 0px 3% 0px;
+            color: rgb(5, 5, 185);
+        }
+
+        select {
+            margin: 15px 0px;
+            background-color: white;
+            width: 80%;
+            border: 1px solid rgba(0, 0, 0, 0.267);
+            height: 30px;
+        }
+
+        button {
+            background-color: rgb(18, 87, 151);
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.95em;
+            border: none;
+        }
+
+        form {
+            box-shadow: 1px 1px 2px 2px gainsboro;
+            width: 35%;
+            padding: 25px;
+            margin: auto;
+        }
+
+        #result {
+            color: red;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<script>
+    
+    function OrderCake() {
+        var size1 = document.getElementById('cakeSize1')
+        var size2 = document.getElementById('cakeSize2')
+        var size3 = document.getElementById('cakeSize3')
+        var size4 = document.getElementById('cakeSize4')
+        var filling = document.getElementById('filling')
+        var candles = document.getElementById('includecandles')
+        var price = ''
+        var cakeSize = ''
+
+        const size_array = new Array()
+        size_array["roundcake6"] = 200
+        size_array["roundcake8"] = 500
+        size_array["roundcake10"] = 1000
+        size_array["roundcake12"] = 2000
+
+        
+        if(size1.checked){
+            cakeSize = Number(size_array[size1.value])
+        }
+        if(size2.checked){
+            cakeSize = Number(size_array[size2.value])
+        }
+        if(size3.checked){
+            cakeSize = Number(size_array[size3.value])
+        }
+        if(size4.checked){
+            cakeSize = Number(size_array[size4.value])
+        }
+        if (candles.checked) {
+            price = cakeSize + Number(filling.value) + 15
+        }
+        else {
+            price = cakeSize + Number(filling.value)
+        }
+        document.getElementById('result').innerHTML = `The Total Price for your cake is Rs ${price}`
+    }
+</script>
+
+<body>
+    <div id="root">
+        <h1>Cake Order Form</h1>
+        <form>
+            <h2>Make your cake</h2>
+            <div><label>Size of the cake</label></div>
+            <input type="radio" id="cakeSize1" value="roundcake6" name="cakeSize" /> Round cake 6 - serves 8 people (Rs
+            200)<br />
+            <input type="radio" id="cakeSize2" value="roundcake8" name="cakeSize" /> Round cake 8 - serves 12 people (Rs
+            500)<br />
+            <input type="radio" id="cakeSize3" value="roundcake10" name="cakeSize" /> Round cake 10 - serves 16 people
+            (Rs
+            1000)<br />
+            <input type="radio" id="cakeSize4" value="roundcake12" name="cakeSize" /> Round cake 12 - serves 30 people
+            (Rs
+            2000)<br />
+            <div>
+                <label>Filling</label>
+            </div>
+            <select id='filling'>
+                <option value="None">Select Filling</option>
+                <option value="50">Lemon(Rs 50)</option>
+                <option value="75">Custard(RS 75)</option>
+                <option value="80">Fudge(Rs 80)</option>
+                <option value="250">Apricot(Rs 250)</option>
+                <option value="70">Buttercream(Rs 70)</option>
+                <option value="120">Chocolate Mousse(Rs 120)</option>
+            </select>
+            <div>
+                <label for='includecandles' class="inlinelabel">Include Candles (Rs 15)</label>
+                <input type="checkbox" id="includecandles" name='includecandles' />
+            </div>
+            <button onclick="OrderCake()" type="button">Place order</button>
+            <p id="result"></p>
+        </form>
+    </div>
+</body>
+
+</html>
